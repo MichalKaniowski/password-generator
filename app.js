@@ -1,6 +1,6 @@
-import {displayAlert} from "./dom-utils.js"; 
-import { generatePassword } from "./dom-utils.js";
-import { displayStrengthOfPassword } from "./dom-utils.js";
+import {displayAlert} from "./utils.js"; 
+import { generatePassword } from "./utils.js";
+import { displayStrengthOfPassword } from "./utils.js";
 
 const form = document.querySelector("form");
 const lengthInput = document.querySelector(".length-input");
