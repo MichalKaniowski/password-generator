@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/9ca2fe81e6.js" crossorigin="anonymous"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main>
+        <header>
+            <h1 class="main-heading">Password generator</h1>
+        </header>
+
+        <form>
+            <div class="box password-container">
+                <strong>P4$5WOrd!</strong>
+                <button type="button" class="copy-button"><i class="fa-regular fa-copy fa-xl copy-icon"></i></button>
+            </div>
+    
+            <div class="box details-container">
+                <div class="length-container">
+                    <p class="length-paragraph">Character Length</p>
+                    <span>10</span>
+                </div>
+
+                
+                <input type="range" class="length-input" min="4" max="20">
+                
+
+                <div>
+                    <input type="checkbox" id="first-checkbox">
+                    <p class="option-paragraph">Include Uppercase Letters</p>
+                </div>
+    
+                <div>
+                    <input type="checkbox" id="second-checkbox">
+                    <p class="option-paragraph">Include Lowercase Letters</p>
+                </div>
+    
+                <div>
+                    <input type="checkbox" id="third-checkbox">
+                    <p class="option-paragraph">Include numbers</p>
+                </div>
+    
+                <div>
+                    <input type="checkbox" id="fourth-checkbox">
+                    <p class="option-paragraph">Include symbols</p>
+                </div>
+    
+                <div class="strength-container">
+                    <strong>STRENGTH</strong>
+                    <div class="rectangles-container">
+                        <span></span>
+                        <div class="vertical-rectangle"></div>
+                        <div class="vertical-rectangle"></div>
+                        <div class="vertical-rectangle"></div>
+                        <div class="vertical-rectangle"></div>
+                    </div>
+                </div>
+                <button type="submit" class="generate-button">Generate</button>
+            </div>
+        </form>
+        
+    </main>
+
+
+    <script type="module" src="app.js"></script>
+    <script type="module" src="dom-utils.js"></script>
+</body>
+</html>
