@@ -4,8 +4,16 @@ const secondCheckbox = document.querySelector("#second-checkbox");
 const thirdCheckbox = document.querySelector("#third-checkbox");
 const fourthCheckbox = document.querySelector("#fourth-checkbox");
 
+let password = "";
+let characters = "";
+let numberOfMarkedInputs = 0;
+
 
 export const displayAlert = (title, text) => {
+    if (document.querySelectorAll(".alert").length > 0) {
+        return;
+    }
+
     document.querySelector("main").classList.add("blur");
 
     const root = document.querySelector("body");
@@ -37,8 +45,15 @@ export const displayAlert = (title, text) => {
     root.appendChild(alert);
 }
 
+const addToCharacters = (kindOfCharacters) => {
+    characters += kindOfCharacters;
+    let randomNumber = Math.floor(Math.random() * kindOfCharacters.length);
+    password += kindOfCharacters[randomNumber];
+    numberOfMarkedInputs += 1;
+}
+
 export const generatePassword = () => {
-    const uppercaseLetters = "ABCDEFGHIJKLMNOPRSTUVWXYZ"; 
+    const uppercaseLetters = "ABCDEFGHIJKLMNOPRSTUVWXYZ";
     const lowercaseLetters = "abcdefghijklmnoprstuvwxyz";
     const symbols = "!@#$%^&*()<,>.?/:;{[}]|";
     const numbers = "0123456789";
@@ -49,49 +64,37 @@ export const generatePassword = () => {
     const includeNumbers = thirdCheckbox.checked;
     const includeSymbols = fourthCheckbox.checked;
 
-    let password = "";
-    let characters = "";
-    let numberOfMarkedInputs = 0;
+    password = "";
+    characters = "";
+    numberOfMarkedInputs = 0;
 
     if (includeLowerCaseLetters !== true && includeUpperCaseLetters !== true && includeNumbers !== true && includeSymbols !== true) {
         return;
     }
 
     if (includeUpperCaseLetters) {
-        characters += uppercaseLetters;
-        let randomNumber = Math.floor(Math.random()*uppercaseLetters.length);
-        password += uppercaseLetters[randomNumber];
-        numberOfMarkedInputs += 1;
+        addToCharacters(uppercaseLetters);
     }
 
     if (includeLowerCaseLetters) {
-        characters += lowercaseLetters
-        let randomNumber = Math.floor(Math.random()*lowercaseLetters.length);
-        password += lowercaseLetters[randomNumber];
-        numberOfMarkedInputs += 1;
+        addToCharacters(lowercaseLetters);
     }
 
     if (includeNumbers) {
-        characters += numbers;
-        let randomNumber = Math.floor(Math.random()*numbers.length);
-        password += numbers[randomNumber];
-        numberOfMarkedInputs += 1;
+        addToCharacters(numbers);
     }
 
     if (includeSymbols) {
-        characters += symbols;
-        let randomNumber = Math.floor(Math.random()*symbols.length);
-        password += symbols[randomNumber];
-        numberOfMarkedInputs += 1;
+        addToCharacters(symbols);
     }
 
-    for (let i=0; i<passwordLength-numberOfMarkedInputs; i++) {
-        let randomNumber = Math.floor(Math.random()*characters.length);
+    for (let i = 0; i < passwordLength - numberOfMarkedInputs; i++) {
+        let randomNumber = Math.floor(Math.random() * characters.length);
         password += characters[randomNumber];
-    } 
+    }
 
     //shuffling password
-    password = password.split('').sort(function(){return 0.5-Math.random()}).join('');
+    password = password.split('').sort(function () { return 0.5 - Math.random() }).join('');
 
     return password;
 }
@@ -99,35 +102,34 @@ export const generatePassword = () => {
 export const displayStrengthOfPassword = (password) => {
     const passwordStrengthElement = document.querySelector(".rectangles-container span");
     let passwordStrength = "";
+    let strengthLevelOfPassword = 0;
 
     document.querySelectorAll(".vertical-rectangle").forEach((rect) => {
         rect.classList.remove("filled");
     })
 
     if (password.length > 3) {
-        document.querySelectorAll(".vertical-rectangle")[0].classList.add("filled");
+        strengthLevelOfPassword = 1;
         passwordStrength = "Weak";
-    } 
+    }
 
     if (password.length > 6) {
-        document.querySelectorAll(".vertical-rectangle")[0].classList.add("filled");
-        document.querySelectorAll(".vertical-rectangle")[1].classList.add("filled");
+        strengthLevelOfPassword = 2;
         passwordStrength = "Medium";
     }
 
     if (password.length > 9) {
-        document.querySelectorAll(".vertical-rectangle")[0].classList.add("filled");
-        document.querySelectorAll(".vertical-rectangle")[1].classList.add("filled");
-        document.querySelectorAll(".vertical-rectangle")[2].classList.add("filled");
+        strengthLevelOfPassword = 3;
         passwordStrength = "Strong";
     }
 
     if (password.length > 12) {
-        document.querySelectorAll(".vertical-rectangle")[0].classList.add("filled");
-        document.querySelectorAll(".vertical-rectangle")[1].classList.add("filled");
-        document.querySelectorAll(".vertical-rectangle")[2].classList.add("filled");
-        document.querySelectorAll(".vertical-rectangle")[3].classList.add("filled");
+        strengthLevelOfPassword = 4;
         passwordStrength = "Very Strong";
+    }
+
+    for (let i=0; i<strengthLevelOfPassword; i++) {
+        document.querySelectorAll(".vertical-rectangle")[i].classList.add("filled");
     }
 
     passwordStrengthElement.innerText = passwordStrength;
