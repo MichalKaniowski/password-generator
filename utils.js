@@ -106,26 +106,38 @@ export const displayStrengthOfPassword = (password) => {
 
     document.querySelectorAll(".vertical-rectangle").forEach((rect) => {
         rect.classList.remove("filled");
-    })
-
-    if (password.length > 3) {
-        strengthLevelOfPassword = 1;
-        passwordStrength = "Weak";
-    }
-
-    if (password.length > 6) {
-        strengthLevelOfPassword = 2;
-        passwordStrength = "Medium";
-    }
-
-    if (password.length > 9) {
-        strengthLevelOfPassword = 3;
-        passwordStrength = "Strong";
-    }
+    });
 
     if (password.length > 12) {
+        strengthLevelOfPassword += 3;
+    } else {
+        if (password.length > 8) {
+            strengthLevelOfPassword += 2;
+        } else {
+            strengthLevelOfPassword += 1;
+        }
+    }
+
+    if (numberOfMarkedInputs > 2) {
+        strengthLevelOfPassword += 1;
+    }
+
+    if (password.length > 15) {
         strengthLevelOfPassword = 4;
-        passwordStrength = "Very Strong";
+    }
+
+    switch(strengthLevelOfPassword) {
+        case 1:
+            passwordStrength = "Weak";
+            break;
+        case 2:
+            passwordStrength = "Medium";
+            break;
+        case 3:
+            passwordStrength = "Strong";
+            break;
+        case 4:
+            passwordStrength = "Very Strong";
     }
 
     for (let i=0; i<strengthLevelOfPassword; i++) {
